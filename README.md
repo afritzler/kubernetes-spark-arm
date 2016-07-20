@@ -27,7 +27,7 @@ For details, you can look at the Dockerfiles in the Sources section.
 ## Step One: Create namespace
 
 ```sh
-$ kubectl create -f examples/spark/namespace-spark-cluster.yaml
+$ kubectl create -f namespace-spark-cluster.yaml
 ```
 
 Now list all namespaces:
@@ -54,30 +54,30 @@ The Master [service](../../docs/user-guide/services.md) is the master service
 for a Spark cluster.
 
 Use the
-[`examples/spark/spark-master-controller.yaml`](spark-master-controller.yaml)
+[`spark-master-controller.yaml`](spark-master-controller.yaml)
 file to create a
 [replication controller](../../docs/user-guide/replication-controller.md)
 running the Spark Master service.
 
 ```console
-$ kubectl create -f examples/spark/spark-master-controller.yaml
+$ kubectl create -f spark-master-controller.yaml
 replicationcontroller "spark-master-controller" created
 ```
 
 Then, use the
-[`examples/spark/spark-master-service.yaml`](spark-master-service.yaml) file to
+[`spark-master-service.yaml`](spark-master-service.yaml) file to
 create a logical service endpoint that Spark workers can use to access the
 Master pod.
 
 ```console
-$ kubectl create -f examples/spark/spark-master-service.yaml
+$ kubectl create -f spark-master-service.yaml
 service "spark-master" created
 ```
 
 You can then create a service for the Spark Master WebUI:
 
 ```console
-$ kubectl create -f examples/spark/spark-webui.yaml
+$ kubectl create -f spark-webui.yaml
 service "spark-webui" created
 ```
 
@@ -132,11 +132,11 @@ program.
 
 The Spark workers need the Master service to be running.
 
-Use the [`examples/spark/spark-worker-controller.yaml`](spark-worker-controller.yaml) file to create a
+Use the [`spark-worker-controller.yaml`](spark-worker-controller.yaml) file to create a
 [replication controller](../../docs/user-guide/replication-controller.md) that manages the worker pods.
 
 ```console
-$ kubectl create -f examples/spark/spark-worker-controller.yaml
+$ kubectl create -f spark-worker-controller.yaml
 replicationcontroller "spark-worker-controller" created
 ```
 
@@ -175,7 +175,7 @@ a web notebook frontend or the traditional Spark command line. See
 for more details.
 
 ```console
-$ kubectl create -f examples/spark/zeppelin-controller.yaml
+$ kubectl create -f zeppelin-controller.yaml
 replicationcontroller "zeppelin-controller" created
 ```
 
@@ -248,7 +248,7 @@ information.
 ## tl;dr
 
 ```console
-kubectl create -f examples/spark
+kubectl create -f .
 ```
 
 After it's setup:
@@ -279,7 +279,7 @@ Then visit [http://localhost:8080/](http://localhost:8080/).
   to submit jobs using external client other than Zeppelin or `spark-submit` on
   the `zeppelin` pod, you will need to provide a way for your clients to get to
   the
-  [`examples/spark/spark-master-service.yaml`](spark-master-service.yaml). See
+  [`spark-master-service.yaml`](spark-master-service.yaml). See
   [Services](../../docs/user-guide/services.md) for more information.
 
 ## Known Issues With Zeppelin
@@ -294,7 +294,3 @@ Then visit [http://localhost:8080/](http://localhost:8080/).
   you see Zeppelin go into `Disconnected` state (there will be a red dot on the
   top right as well), the `port-forward` probably failed and needs to be
   restarted. See #12179.
-
-<!-- BEGIN MUNGE: GENERATED_ANALYTICS -->
-[![Analytics](https://kubernetes-site.appspot.com/UA-36037335-10/GitHub/examples/spark/README.md?pixel)]()
-<!-- END MUNGE: GENERATED_ANALYTICS -->
